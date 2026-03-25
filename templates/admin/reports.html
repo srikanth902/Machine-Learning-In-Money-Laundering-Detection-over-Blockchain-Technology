@@ -1,0 +1,55 @@
+{% extends 'admin/adminbase.html' %}
+{% block title %}Admin - User Management{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow p-4 rounded">
+        <h2 class="text-center mb-4">My Prediction History</h2>
+
+        {% if predictions %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>From Bank</th>
+                            <th>To Bank</th>
+                            <th>Amount Received</th>
+                            <th>Receiving Currency</th>
+                            <th>Amount Paid</th>
+                            <th>Payment Currency</th>
+                            <th>Payment Format</th>
+                            <th>Probability</th>
+                            <th>Prediction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in predictions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ p.from_bank }}</td>
+                            <td>{{ p.to_bank }}</td>
+                            <td>{{ p.amount_received }}</td>
+                            <td>{{ p.receiving_currency }}</td>
+                            <td>{{ p.amount_paid }}</td>
+                            <td>{{ p.payment_currency }}</td>
+                            <td>{{ p.payment_format }}</td>
+                            <td>{{ p.probability|floatformat:2 }}</td>
+                            <td>
+                                {% if p.prediction == 1 %}
+                                    <span class="badge bg-danger">{{ p.label }}</span>
+                                {% else %}
+                                    <span class="badge bg-success">{{ p.label }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-center text-muted">No predictions found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

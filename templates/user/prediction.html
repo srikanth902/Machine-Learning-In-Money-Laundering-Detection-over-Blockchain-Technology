@@ -1,0 +1,103 @@
+{% extends 'user/userbase.html' %}
+{% block title %}Prediction - Money Laundering{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow p-4 rounded">
+        <h2 class="mb-4 text-center">Enter Transaction Details</h2>
+        <form method="post" class="row g-3">
+            {% csrf_token %}
+
+            <div class="col-md-6">
+                <label for="from_bank" class="form-label">From Bank</label>
+                <input type="number" class="form-control" id="from_bank" name="from_bank" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="to_bank" class="form-label">To Bank</label>
+                <input type="number" class="form-control" id="to_bank" name="to_bank" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="amount_received" class="form-label">Amount Received</label>
+                <input type="number" step="0.01" class="form-control" id="amount_received" name="amount_received" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="receiving_currency" class="form-label">Receiving Currency</label>
+                <select class="form-select" id="receiving_currency" name="receiving_currency" required>
+                    <option value="" selected disabled>-- Select Currency --</option>
+                    <option>Australian Dollar</option>
+                    <option>Bitcoin</option>
+                    <option>Brazil Real</option>
+                    <option>Canadian Dollar</option>
+                    <option>Euro</option>
+                    <option>Mexican Peso</option>
+                    <option>Ruble</option>
+                    <option>Rupee</option>
+                    <option>Saudi Riyal</option>
+                    <option>Shekel</option>
+                    <option>Swiss Franc</option>
+                    <option>UK Pound</option>
+                    <option>US Dollar</option>
+                    <option>Yen</option>
+                    <option>Yuan</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="amount_paid" class="form-label">Amount Paid</label>
+                <input type="number" step="0.01" class="form-control" id="amount_paid" name="amount_paid" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="payment_currency" class="form-label">Payment Currency</label>
+                <select class="form-select" id="payment_currency" name="payment_currency" required>
+                    <option value="" selected disabled>-- Select Currency --</option>
+                    <option>Australian Dollar</option>
+                    <option>Bitcoin</option>
+                    <option>Brazil Real</option>
+                    <option>Canadian Dollar</option>
+                    <option>Euro</option>
+                    <option>Mexican Peso</option>
+                    <option>Ruble</option>
+                    <option>Rupee</option>
+                    <option>Saudi Riyal</option>
+                    <option>Shekel</option>
+                    <option>Swiss Franc</option>
+                    <option>UK Pound</option>
+                    <option>US Dollar</option>
+                    <option>Yen</option>
+                    <option>Yuan</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="payment_format" class="form-label">Payment Format</label>
+                <select class="form-select" id="payment_format" name="payment_format" required>
+                    <option value="" selected disabled>-- Select Format --</option>
+                    <option>ACH</option>
+                    <option>Bitcoin</option>
+                    <option>Cash</option>
+                    <option>Cheque</option>
+                    <option>Credit Card</option>
+                    <option>Reinvestment</option>
+                    <option>Wire</option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-3">
+                <button type="submit" class="btn btn-primary px-4">Predict</button>
+            </div>
+        </form>
+    </div>
+
+    {% if result %}
+    <div class="card shadow p-4 rounded mt-4">
+        <h3 class="text-center">Prediction Result</h3>
+        <p class="mb-1"><strong>Probability:</strong> {{ result.probability|floatformat:2 }}</p>
+        <p class="mb-1"><strong>Prediction:</strong> {{ result.label }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

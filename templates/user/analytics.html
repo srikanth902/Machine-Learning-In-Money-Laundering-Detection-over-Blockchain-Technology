@@ -1,0 +1,84 @@
+{% extends 'user/userbase.html' %}
+{% block title %}Analytics - Money Laundering{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Prediction Analytics</h2>
+
+    <div class="row g-4">
+        <!-- Bar Chart -->
+        <div class="col-md-6">
+            <div class="card shadow p-3 rounded">
+                <h5 class="text-center">Prediction Counts (Bar)</h5>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="col-md-6">
+            <div class="card shadow p-3 rounded">
+                <h5 class="text-center">Prediction Distribution (Pie)</h5>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Line Chart -->
+        <div class="col-12">
+            <div class="card shadow p-3 rounded">
+                <h5 class="text-center">Predictions Over Time (Line)</h5>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Data from Django context
+    const labels = {{ labels|safe }};
+    const counts = {{ counts|safe }};
+    const timelineLabels = {{ timeline_labels|safe }};
+    const timelineCounts = {{ timeline_counts|safe }};
+
+    // Bar Chart
+    new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Predictions",
+                data: counts,
+                backgroundColor: ["#28a745", "#dc3545"], // green/red
+            }]
+        }
+    });
+
+    // Pie Chart
+    new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: counts,
+                backgroundColor: ["#28a745", "#dc3545"], // green/red
+            }]
+        }
+    });
+
+    // Line Chart
+    new Chart(document.getElementById("lineChart"), {
+        type: "line",
+        data: {
+            labels: timelineLabels,
+            datasets: [{
+                label: "Predictions Over Time",
+                data: timelineCounts,
+                fill: false,
+                borderColor: "#007bff",
+                tension: 0.1
+            }]
+        }
+    });
+</script>
+{% endblock %}
