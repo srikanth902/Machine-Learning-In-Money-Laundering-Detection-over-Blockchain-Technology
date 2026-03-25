@@ -78,17 +78,11 @@ The project follows these steps:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/money-laundering-detection.git
+git clone [https://github.com/yourusername/money-laundering-detection.git](https://github.com/srikanth902/Machine-Learning-In-Money-Laundering-Detection-over-Blockchain-Technology.git)
 cd money-laundering-detection
 ```
 
-### 2️⃣ Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3️⃣ Run the Project
+### 2️⃣ Run the Project
 
 ```bash
 python main.py
@@ -99,13 +93,17 @@ python main.py
 ## 📂 Project Structure
 
 ```
-money-laundering-detection/
-│── data/               # Dataset files
-│── src/                # Source code
-│── model/              # Trained models
-│── main.py             # Main execution file
-│── requirements.txt
-│── README.md
+Machine-Learning-In-Money-Laundering-Detection-over-Blockchain-Technology/
+  │── Admins/              
+  │── Backend/                
+  │── Users/              
+  │── model             
+  │── static
+  │── staticfiles
+  │── templates
+  │── README.md
+  │──db.sqlite3
+  └── manage.py
 ```
 
 ---
